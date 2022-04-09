@@ -1,0 +1,60 @@
+Week 1:
+- Came up with basic idea for idea
+- Emailed to Frank, cleared up idea
+
+Week 5:
+- Bought SD card and SD reader online, waiting for their delivery
+
+Week 6:
+- Flashed Raspbian onto SD card
+- Installed Raspbian onto Pi, began basic setup of CUPS
+
+Week 7:
+
+Wednesday:
+- Managed to get a print server working, trying to go into /var/spool/cups and accessing files to harvest more information
+- Plan: somehow intercept information being received at Raspberry Pi
+- Considering switching over to OpenWRT, but might be too much effort
+
+Thursday:
+- Tried using Scapy to scrape IPP requests coming in, no dice – print instructions ended up being sent over, I need raw files
+- Considering: using Svelte/Flask to run a mini server on the Pi, and use pycups to print stuff over to the printer
+    - While printer is busy printing files, send a copy of that file to my “sniffer” server, which stores every document printed
+- Asked for 2-day extension from Frank
+
+Friday:
+- Svelte doesn’t seem like a good fit for the print server, planning to have Svelte used for my sniffer website instead
+- Fixed printer so that it runs the right printer driver
+- Implemented basic print server, I can upload files to a local address and it’ll print those files for me through PyCUPS
+    - Because I’m transferring files, the print server can actually send a copy of that file off to another server
+
+Sunday:
+- Finished uploading to Heroku, that’s all set up
+    - Cannot upload files directly to Heroku, since that needs AWS (files aren’t persistent) – instead, we’ll upload the details of each print job
+    - Requires us to sniff out the details of our last print job (and somehow get the ID of the print job when printing to ensure we get the right job)
+- Need to finish off the Svelte app, configure interop between Flask and Svelte (probably not using HTTP request, since I can just serve the static page)
+
+Week 8:
+
+Monday:
+- Finished setting up Tailwind
+- Finished wiring up print job stuff to print server, waiting until the job is finished and then transferring data
+- Still need to link up the Heroku server and my local print server, not very easy
+    - Lots of bugfixing and testing
+
+Wednesday:
+- Everything is hooked up, I can send printer data to the Heroku server without a hitch
+- Now it’s just cleaning up and bugfixing, as well as design improvements
+- Should also start writing up the report
+
+Thursday:
+- Added some styling to the website, still need to test it a little
+- Started writing up report, very basic draft
+
+Friday:
+- Finished report (for the most part) - still some cleaning up to do
+- Brainstormed video script, finished rough draft
+
+Saturday:
+- Added some extra details to the report, mostly in terms of build instructions, what instructions I added to get servers to launch on startup
+- Finished filming & editing video

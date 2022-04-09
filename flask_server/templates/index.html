@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+
+  <title>Wireless Print Server</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="m-4">
+    <h1 class="text-3xl font-bold text-center p-2">Raspberry Pi Print Server</h1>
+    <form method="POST" action="" enctype="multipart/form-data" class="border rounded p-2">
+      <p>Choose a file to print wirelessly:</p>
+
+      <!-- File upload box -->
+      <div class="bg-white px-2">
+        <div class="max-w-md mx-auto rounded-lg overflow-hidden md:max-w-xl">
+          <div class="md:flex">
+            <div class="w-full p-3">
+              <div
+                class="relative border-dotted h-48 rounded-lg border-dashed border-2 border-green-400 bg-gray-100 flex justify-center items-center">
+                <div class="absolute">
+                  <div class="flex flex-col items-center">
+                    <i class="fa fa-folder-open fa-4x text-green-400"></i>
+                    <span class="block text-gray-400 font-normal">Click me to upload a file</span>
+                  </div>
+                </div>
+                <input type="file" class="h-full w-full opacity-0" name="file">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit"
+        class="px-3 py-1.5 m-2 border rounded-lg bg-green-400 hover:bg-green-600 text-white">Submit</button>
+    </form>
+  </div>
+</body>
+
+</html>
