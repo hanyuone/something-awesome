@@ -39,11 +39,11 @@ There are two "servers" running on the Pi - the CUPS server (on port 631) and th
 
 Below is a flow diagram of how the Flask server works in tandem with CUPS and the external server to harvest data:
 
-![](images/flow_diagram.png)
+![](flow_diagram.png)
 
 1. First, the user uploads a file and presses "Submit". `pycups` then sends that file over to the printer as a print job.
 2. The print job ID gets returned from `pycups`, and we wait until the job is finished - we can only get the pertinent data we need when the job is done (e.g. how many pages were needed to print the file). Once that's done, we store that pertinent data in a JSON format.
-3. We use `requests` to send that sniffed data over to an external server (`fake-printer.herokuapp.com`), which displays it in a readable format.
+3. We use `requests` to send that sniffed data over to an external server (`fake-printer.herokuapp.com`) through the `/upload` endpoint, which then displays that data in a readable format.
 
 I also had both the CUPS server and the Flask print server launch on startup. For the CUPS server, this is done by editing `/etc/rc.local` and adding the line `sudo /etc/init.d/cups start`.
 
@@ -77,17 +77,27 @@ And the Flask server will run on startup.
 
 ### External Server
 
-The external server was a bit harder to set up - I used Flask, like with the Raspberry Pi, but the website had to look a bit cleaner. Thus, for this project, I decided to learn some frontend libraries - Svelte and Tailwind.
+The external server was a bit harder to set up - I used Flask, like with the Raspberry Pi, but the website had to look a bit cleaner. Thus, for this section of the project, I decided to learn some frontend libraries - [Svelte](https://svelte.dev/) and [Tailwind](https://tailwindcss.com/).
 
 I picked Svelte for the stack because it looked cleaner and took up less space compared to a full React app, and when hosting a website for free on Heroku every little bit of space counts. Tailwind was used because it allowed me to make good designs without using CSS at all, which was definitely a plus in the overall process despite the learning curve.
 
+The server itself is pretty simple - there's one API endpoint, `/upload`, which is a POST endpoint that listens for the details of new files being printed. It receives JSON data in this format:
+
+```json
+{
+  "name": string,
+  "pages": number,
+  "time": number /* Unix timestamp */
+}
+```
+
 Here's what the sniffer server looks like when no files have been sniffed yet:
 
-![](images/empty.png)
+![](empty.png)
 
 And here's what the sniffer server looks like with some files:
 
-![](images/sniffed.png)
+![](sniffed.png)
 
 A demo of the entire flow (printing a file from the Flask server, it getting printed, details getting sniffed and published onto the website) can be found in the video.
 
